@@ -17,13 +17,15 @@
             name:inputName.value
         }
         array.push(newProduct)
+        localStorage.setItem('productos', JSON.stringify(array))
         form.reset()
     })
 
     btn.addEventListener('click', () => {
-        if (array.length != 0) {
+        const productos=JSON.parse(localStorage.getItem('productos'))
+        if (productos) {
             socket.emit('products', 'array con productos')
-            showProducts(array)
+            showProducts(productos)
         }
         else {
             socket.emit('products', 'array vacío')
@@ -38,11 +40,11 @@
     })
 
     function showProducts(arrayProducts) {
+        products.innerHTML=''
         arrayProducts.forEach((prod) => {
-            products.innerHTML=''
-            const div = document.createElement('div')
-            div.innerHTML = `${prod.id}  ${prod.name}`
-            products.appendChild(div)
+            const li = document.createElement('li')
+            li.innerHTML = `${prod.id}  ${prod.name}`
+            products.appendChild(li)
         })
     }
 

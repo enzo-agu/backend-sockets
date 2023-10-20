@@ -10,6 +10,7 @@ serverHttp.listen(PORT, () => {
     console.log(`Server running in port ${PORT}`)
 })
 
+
 serverSocket.on('connection', (socketClient) => {
     console.log(`Client conected ${socketClient.id}`)
     
@@ -17,7 +18,7 @@ serverSocket.on('connection', (socketClient) => {
         console.log(message)
     } )
 
-    socketClient.on('message-realTime', (message)=>{
+    socketClient.on('realTime-connected', (message)=>{
         console.log(message)
     })
 
